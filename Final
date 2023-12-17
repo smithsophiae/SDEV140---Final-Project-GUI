@@ -1,0 +1,174 @@
+#importing the tkinter into the program
+import tkinter as tk
+from tkinter import ttk
+from tkinter import *
+from tkinter.ttk import *
+
+#declaring variables
+variables = dict()
+
+
+#runs when user clicks the submit button
+def on_submit(): 
+    
+    message = (
+    f'Thank you for ordering with us!'
+    )
+    
+    print(message)
+    #outputs a message for the user 
+    
+
+#setting the frame for the order form including the title, size, and font plus a label on the form
+root = tk.Tk()
+root.title("Tony's Pizza ~ Order Form")
+root.columnconfigure(0, weight = 1)
+ttk.Label(
+root, text = "~ Order Form ~",
+font = ("TkDefaultFont", 16)
+).grid()
+drf = ttk.Frame(root)
+drf.grid(padx = 10, sticky = (tk.E + tk.W))
+drf.columnconfigure(0, weight = 1)
+
+
+#creating the first part of the order form for ordering
+info = ttk.LabelFrame(drf, text = "- Order Basics -")
+info.grid(sticky = (tk.W + tk.E))
+for i in range(3):
+    info.columnconfigure(i, weight = 1)
+    
+#creating a label for the customer to enter their name and an entry box and formatting its position on the form  
+variables["Customer Name"] = tk.StringVar()
+ttk.Label(info, text = "Customer Name").grid(row = 0, column = 0)
+ttk.Entry(info, textvariable = variables["Customer Name"]
+).grid(row = 1, column = 0, sticky = (tk.W + tk.E))
+
+#creating a label for the customer address and an entry box and formatting its position on the form
+variables["Customer Address"] = tk.StringVar()
+ttk.Label(info, text = "Customer Address").grid(row = 0, column = 1)
+ttk.Entry(info, textvariable = variables["Customer Address"]
+).grid(row = 1, column = 1, sticky = (tk.W + tk.E))
+
+#creating a drop down box of options for various pizza types and formatting its position on the form
+type_values = ["Plain", "Cheese", "Pepperoni", "Sausage", "Meat Lover", "BBQ Chicken", "Veggie"]
+variables["Type Of Pizza"] = tk.StringVar()
+ttk.Label(info, text = "Type Of Pizza").grid(row = 2, column = 0)
+ttk.Combobox(
+info, textvariable = variables["Type Of Pizza"], values = type_values
+).grid(row = 3, column = 0, sticky = (tk.W + tk.E))
+
+#creating multiple options for pizza size allowing the user to select only one and formatting on the form
+variables["Pizza Size"] = tk.StringVar()
+ttk.Label(info, text = "Pizza Size").grid(row = 2, column = 1)
+sizeframe = ttk.Frame(info)
+for size in ("Small", "Medium", "Large"):
+    ttk.Radiobutton(
+    sizeframe, value = size, text = size, variable = variables["Pizza Size"]
+    ).pack(side = tk.LEFT, expand = True)
+sizeframe.grid(row = 3, column = 1, sticky = (tk.W + tk.E))
+
+
+#creating the 2nd section of the form for toppings
+t_info = ttk.LabelFrame(drf, text = "! Add Toppings !")
+t_info.grid(sticky = (tk.W + tk.E))
+for i in range(3):
+    t_info.columnconfigure(i, weight = 1)
+
+#creating a check box for if the user wants bacon and formatting its position on the form
+variables["Bacon"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Bacon"], 
+text = "Bacon"
+).grid(row = 2, column = 0, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants chicken and formatting its position on the form
+variables["Chicken"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Chicken"], 
+text = "Chicken"
+).grid(row = 2, column = 1, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants ham and formatting its position on the form
+variables["Ham"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Ham"], 
+text = "Ham"
+).grid(row = 2, column = 2, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants mushroom and formatting its position on the form
+variables["Mushrooms"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Mushrooms"], 
+text = "Mushrooms"
+).grid(row = 3, column = 0, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants olives and formatting its position on the form
+variables["Olives"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Olives"], 
+text = "Olives"
+).grid(row = 3, column = 1, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants onions and formatting its position on the form
+variables["Onions"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Onions"], 
+text = "Onions"
+).grid(row = 3, column = 2, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants peppers and formatting its position on the form
+variables["Peppers"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Peppers"], 
+text = "Peppers"
+).grid(row = 4, column = 0, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants pineapple and formatting its position on the form
+variables["Pineapple"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Pineapple"], 
+text = "Pineapple"
+).grid(row = 4, column = 1, sticky = tk.W, pady = 5)
+
+#creating a check box for if the user wants spinach and formatting its position on the form
+variables["Spinach"] = tk.BooleanVar(value = False)
+ttk.Checkbutton(t_info, variable = variables["Spinach"], 
+text = "Spinach"
+).grid(row = 4, column = 2, sticky = tk.W, pady = 5)
+
+
+#creating the final section for the form for extra items
+e_info = ttk.LabelFrame(drf, text = "~ Extras ~")
+e_info.grid(sticky = (tk.W + tk.E))
+for i in range(3):
+    e_info.columnconfigure(i, weight = 1)
+
+#creating two options for bread sticks allowing the user to select only one and formatting on the form
+variables["Add Bread Sticks"] = tk.StringVar()
+ttk.Label(e_info, text = "Add Bread Sticks").grid(row = 5, column = 0)
+stickframe = ttk.Frame(e_info)
+for stick in ("Yes", "No"):
+    ttk.Radiobutton(
+    stickframe, value = stick, text = stick, variable = variables["Add Bread Sticks"]
+    ).pack(side = tk.LEFT, expand = True)
+stickframe.grid(row = 5, column = 1, sticky = (tk.W + tk.E))
+
+#creating multiple options for dessert allowing the user to select only one and formatting on the form
+variables["Add Dessert"] = tk.StringVar()
+ttk.Label(e_info, text = "Add Dessert").grid(row = 6, column = 0)
+stickframe = ttk.Frame(e_info)
+for stick in ("Lava Cake", "Cookies","Brownies", "No Dessert"):
+    ttk.Radiobutton(
+    stickframe, value = stick, text = stick, variable = variables["Add Dessert"]
+    ).pack(side = tk.LEFT, expand = True)
+stickframe.grid(row = 6, column = 1, sticky = (tk.W + tk.E))
+
+
+#adding buttons to the frame
+buttons = tk.Frame(drf)
+buttons.grid(sticky = (tk.W + tk.E))
+
+#submit button creation and formatting
+submit_button = ttk.Button(buttons, text = "Submit")
+submit_button.pack(side = tk.RIGHT)
+
+#exit button creation and formatting
+exit_button = ttk.Button(buttons, text = "Exit")
+exit_button.pack(side = tk.LEFT)
+
+#configuring the submit button
+submit_button.configure(command = on_submit)
+root.mainloop()
